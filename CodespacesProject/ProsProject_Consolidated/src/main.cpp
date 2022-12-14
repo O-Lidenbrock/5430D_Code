@@ -207,7 +207,7 @@ void opcontrol()
 
 // ------------------- Autonomous Code -------------------//
 
-/* This is sudo-code for now. ~Stephen
+/* This code is WIP. I have a couple more formulas to add. Will get to them at later date. ~Stephen
 
 Robot wheel configuration: 
 
@@ -222,13 +222,13 @@ mtr_dt_right_back(-1); = SE
 mtr_dt_left_back(4); = SW
 
 
-void auton()
+void auton() //relies on the other two auton methods to work. It will call autonMiddle every time the robot needs to move.
 {
 
 }
 
 
-void autonMiddle(double forward, double strafe, double turn)
+void autonMiddle(double forward, double strafe, double turn) //Takes in a number of inches to move forward, strafe, and a number of degrees to turn. Is called ever time the robot moves in the auton code
 {       
         double diameter = 4.1; //diameter in inches
         double circumference = 2*3.14159*(diameter/2); //calculates the circumference in inches from the inputed diameter. The estimation for pi could be changed
