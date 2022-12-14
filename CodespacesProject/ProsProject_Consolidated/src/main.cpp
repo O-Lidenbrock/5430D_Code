@@ -4,19 +4,18 @@
  
 using namespace pros;
  
-/* -------------------------- Motors ------------------------- */
+/* ------------------------ Drive Motors -------------------------- */
 Motor mtr_dt_left_front(19);
 Motor mtr_dt_right_front(-18);
 Motor mtr_dt_right_back(-1);
 Motor mtr_dt_left_back(4);
-/* ----------------------------------------------------------- */
+/* ------------------------ Intake Motors ------------------------- */
 Motor mtr_it_left(-6);
 Motor mtr_it_right(-7);
-/* ----------------------------------------------------------- */
-Motor mtr_fw(3);
- 
-Motor mtr_move(-17);
- 
+/* ------------------------ Flywheel Motors ----------------------- */
+Motor mtr_fw(3);  
+/* ------------------------ Piston Indexer ------------------------ */
+ADIDigitalOut piston ('A', false);
 /* ------------------------- Sensors ------------------------- */
 ADIEncoder track_encoder_forward('G', 'H', false);
 ADIEncoder track_encoder_side('E', 'F', true);
@@ -28,6 +27,13 @@ pros::Imu imu_bottom(5);
 /* ----------------------------------------------------------- */
 Controller controller = CONTROLLER_MASTER;
 Controller controller2 = E_CONTROLLER_PARTNER;
+
+void pistonToggle()
+{
+    piston.set_value(true);
+    delay(200);
+    piston.set_value(false);
+}
  
 void intakeIn()
 {
@@ -79,24 +85,24 @@ void usercontrol()
                    controller.get_analog(ANALOG_LEFT_Y),
                    controller.get_analog(ANALOG_LEFT_X));
  
-        if (controller2.get_digital(L1))
+        if (controller2.get_digital(DIGITAL_L1))
             flywheelOn();
-        else if (controller2.get_digital(L2))
+        else if (controller2.get_digital(DIGITAL_L2))
             flywheelOut();
         else
             flywheelOff();
  
-        if (controller2.get_digital(R1))
+        if (controller2.get_digital(DIGITAL_R1))
             intakeIn();
-        else if (controller2.get_digital(R2))
+        else if (controller2.get_digital(DIGITAL_R2))
             intakeOut();
         else
             intakeOff();
  
-        if (controller2.get_digital(down))
-            air.toggle();
-        else
-            mtr_move.move_voltage(0);
+        while (controller2.get_digital(DIGITAL_DOWN)){
+            pistonToggle();
+            break;
+        }
     }
 }
  
@@ -128,9 +134,7 @@ void usercontrol()
  */
 void initialize()
 {
-	lcd.register_btn1_cb(on_center_button);
-	lcd.initialize();
-	lcd.set_text(1,"Hello PROS User!");
+    pros::lcd::initialize();
 }
  
 /**
@@ -185,9 +189,9 @@ void opcontrol()
  
     while (true)
     {
-        lcd.print(0, "%d %d %d", (lcd.read_buttons() & LCD_BTN_LEFT) >> 2,
-                         (lcd.read_buttons() & LCD_BTN_CENTER) >> 1,
-                         (lcd.read_buttons() & LCD_BTN_RIGHT) >> 0);
+        pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
+                         (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
+                         (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		
         int left = master.get_analog(ANALOG_LEFT_Y);
         int right = master.get_analog(ANALOG_RIGHT_Y);
