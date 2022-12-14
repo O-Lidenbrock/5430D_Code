@@ -79,21 +79,21 @@ void usercontrol()
                    controller.get_analog(ANALOG_LEFT_Y),
                    controller.get_analog(ANALOG_LEFT_X));
  
-        if (controller2.getDigital(L1))
+        if (controller2.get_digital(L1))
             flywheelOn();
-        else if (controller2.getDigital(L2))
+        else if (controller2.get_digital(L2))
             flywheelOut();
         else
             flywheelOff();
  
-        if (controller2.getDigital(R1))
+        if (controller2.get_digital(R1))
             intakeIn();
-        else if (controller2.getDigital(R2))
+        else if (controller2.get_digital(R2))
             intakeOut();
         else
             intakeOff();
  
-        if (controller2.getDigital(down))
+        if (controller2.get_digital(down))
             air.toggle();
         else
             mtr_move.move_voltage(0);
