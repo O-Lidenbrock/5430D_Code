@@ -221,6 +221,7 @@ mtr_dt_right_front(-18); = NE
 mtr_dt_right_back(-1); = SE
 mtr_dt_left_back(4); = SW
 
+*/
 
 void auton() //relies on the other two auton methods to work. It will call autonMiddle every time the robot needs to move.
 {
@@ -235,7 +236,7 @@ void autonMiddle(double forward, double strafe, double turn) //Takes in a number
         double forwardRotations = forward/circumference;
         double strafeRotations = strafe/circumference;
         double robotCircumference = ((2*3.14159)*(17.5/2));/*the circumference*/ //the wheels seem to be 17.5 inches apart, which can then be turned into a circumference of the bot, which then can be turned into a number of rotations to turn a number of degrees
-/*        double rotationsPerDegree = (robotCircumference/diameter)/360; //the circumference can then be divided by the wheel diameter to find the number of rotations to complete a full turn(in place). Then, that number is divided by 360 to find the number of rotations per degree
+        double rotationsPerDegree = (robotCircumference/diameter)/360; //the circumference can then be divided by the wheel diameter to find the number of rotations to complete a full turn(in place). Then, that number is divided by 360 to find the number of rotations per degree
         double turnRotations = turn*rotationsPerDegree;
 
         autonMove(forwardRotations + strafeRotations + turnRotations, forwardRotations - strafeRotations + turnRotations,
@@ -245,6 +246,8 @@ void autonMiddle(double forward, double strafe, double turn) //Takes in a number
 
 void autonMove(double leftFront, double leftBack, double rightFront, double rightBack) //will intake a number of rotations from autonMiddle. The motors are operating like servos
 {
-
+    mtr_dt_left_back.move_relative(leftBack, rotations); // define the motors
+    mtr_dt_left_front.move_relative(leftFront, rotations);
+    mtr_dt_right_back.move_relative(rightBack, rotations);
+    mtr_dt_right_front.move_relative(rightFront, rotations);
 }
-*/
