@@ -166,9 +166,6 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {
-    auton(); 
-}
  
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -225,13 +222,15 @@ mtr_dt_left_back(4); = SW
 
 */
 
-void auton() //relies on the other two auton methods to work. It will call autonMiddle every time the robot needs to move.
+
+
+void autonMove(double leftFront, double leftBack, double rightFront, double rightBack) //will intake a number of rotations from autonMiddle. The motors are operating like servos
 {
-    autonMiddle(0,10,0);
-
+    mtr_dt_left_back.move_relative(leftBack, rotations); // define the motors
+    mtr_dt_left_front.move_relative(leftFront, rotations);
+    mtr_dt_right_back.move_relative(rightBack, rotations);
+    mtr_dt_right_front.move_relative(rightFront, rotations);
 }
-
-
 void autonMiddle(double forward, double strafe, double turn) //Takes in a number of inches to move forward, strafe, and a number of degrees to turn. Is called ever time the robot moves in the auton code
 {       
         double diameter = 4.1; //diameter in inches
@@ -247,10 +246,8 @@ void autonMiddle(double forward, double strafe, double turn) //Takes in a number
 }
 
 
-void autonMove(double leftFront, double leftBack, double rightFront, double rightBack) //will intake a number of rotations from autonMiddle. The motors are operating like servos
+void autonomous() //relies on the other two auton methods to work. It will call autonMiddle every time the robot needs to move.
 {
-    mtr_dt_left_back.move_relative(leftBack, rotations); // define the motors
-    mtr_dt_left_front.move_relative(leftFront, rotations);
-    mtr_dt_right_back.move_relative(rightBack, rotations);
-    mtr_dt_right_front.move_relative(rightFront, rotations);
+    autonMiddle(0,10,0);
+
 }
