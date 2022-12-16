@@ -226,10 +226,10 @@ mtr_dt_left_back(4); = SW
 
 void autonMove(double leftFront, double leftBack, double rightFront, double rightBack) //will intake a number of rotations from autonMiddle. The motors are operating like servos
 {
-    mtr_dt_left_back.move_relative(leftBack, rotations); // define the motors
-    mtr_dt_left_front.move_relative(leftFront, rotations);
-    mtr_dt_right_back.move_relative(rightBack, rotations);
-    mtr_dt_right_front.move_relative(rightFront, rotations);
+    mtr_dt_left_back.move_relative((leftBack/360), 50); // define the motors
+    mtr_dt_left_front.move_relative((leftFront/360), 50);
+    mtr_dt_right_back.move_relative((rightBack/360), 50);
+    mtr_dt_right_front.move_relative((rightBack/360), 50);
 }
 void autonMiddle(double forward, double strafe, double turn) //Takes in a number of inches to move forward, strafe, and a number of degrees to turn. Is called ever time the robot moves in the auton code
 {       
