@@ -225,6 +225,7 @@ mtr_dt_left_back(4); = SW
 
 void auton() //relies on the other two auton methods to work. It will call autonMiddle every time the robot needs to move.
 {
+    autonMiddle(0,10,0);
 
 }
 
