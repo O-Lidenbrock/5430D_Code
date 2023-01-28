@@ -42,5 +42,3 @@ void Auton::autoncontrol() {
         roller();
     }
 }
-
-
