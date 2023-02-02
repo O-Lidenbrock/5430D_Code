@@ -4,15 +4,16 @@
 
 void move(double leftFront, double leftBack, double rightFront,
           double rightBack) {
-  def::mtr_dt_left_back.moveVelocity(leftBack * 200); // define the motors
+
   def::mtr_dt_left_front.moveVelocity(leftFront * 200);
-  def::mtr_dt_right_back.moveVelocity(rightBack * 200);
+  def::mtr_dt_left_back.moveVelocity(leftBack * 200); // define the motors
   def::mtr_dt_right_front.moveVelocity(rightFront * 200);
+  def::mtr_dt_right_back.moveVelocity(rightBack * 200);
 }
 
 void moveArcade(double forward, double strafe, double turn) {
   move(forward + strafe + turn, forward - strafe + turn,
-       forward - strafe - turn, forward + strafe - turn);
+       forward - strafe - turn, forward + strafe - turn); //order matters
 }
 
 void UserControl::usercontrol() {
@@ -29,6 +30,9 @@ void UserControl::usercontrol() {
     {
       turnDivisor = 1;
     }
+
+    //Digital = Buttons - gives True/False
+    //Analog = Joysticks - range of numbers between -100 and 100
     
     // define parameters for moveArcade as controller axises 
     moveArcade(def::controller.getAnalog(ControllerAnalog::rightY),
