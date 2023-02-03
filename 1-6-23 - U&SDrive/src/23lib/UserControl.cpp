@@ -19,13 +19,13 @@ void moveArcade(double forward, double strafe, double turn) {
 void UserControl::usercontrol() {
   while (true) {
     double turnDivisor;
+    double rollerSpeed;
+    // cap flywheel turn speed: slower first then a faster.:on controller2 slow = LT trigger, fast is X
+    // slow intake (for the roller): also controller2
 
     // toggle turn speed
     if(def::controller.getDigital(ControllerDigital::R1))
-    {
-      turnDivisor = 3;
-    }
-
+    {turnDivisor = 3;}
     else
     {
       turnDivisor = 1;
@@ -39,15 +39,27 @@ void UserControl::usercontrol() {
                def::controller.getAnalog(ControllerAnalog::rightX),
                def::controller.getAnalog(ControllerAnalog::leftX)/turnDivisor);
 
+    //flywheel
     if (def::controller2.getDigital(ControllerDigital::L1))
       DiscRollerFlywheel::flywheelOn();
     else if (def::controller2.getDigital(ControllerDigital::L2))
-      DiscRollerFlywheel::flywheelOut();
+      DiscRollerFlywheel::flywheelOut(-300);
+    else if(def::controller2.getAnalog(ControllerDigital::X)){
+      DiscRollerFlywheel::flywheelOut(-500);
+    }
     else
       DiscRollerFlywheel::flywheelOff();
 
+    //intake & roller
+    if(def::controller2.getDigital(ControllerDigital::left)){
+      rollerSpeed = 500;
+    }
+    else{
+      rollerSpeed = 1200;
+    }
+
     if (def::controller2.getDigital(ControllerDigital::R1))
-      DiscRollerFlywheel::intakeIn();
+      DiscRollerFlywheel::intakeIn(rollerSpeed);
     else if (def::controller2.getDigital(ControllerDigital::R2))
       DiscRollerFlywheel::intakeOut();
     else
