@@ -4,4 +4,4 @@ class UserControl
 {
     public: 
         static void usercontrol(); 
-};  
+};

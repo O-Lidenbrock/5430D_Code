@@ -6,12 +6,12 @@ class DiscRollerFlywheel
 {
     public: 
         static void intakeOut(); 
-        static void intakeIn(); 
+        static void intakeIn(int volts); 
         static void intakeOff(); 
 
         static void roller(std::string color); 
 
-        static void flywheelOn();
-        static void flywheelOut(); 
+        static void flywheelBack();
+        static void flywheelForward(int speed); 
         static void flywheelOff(); 
 };

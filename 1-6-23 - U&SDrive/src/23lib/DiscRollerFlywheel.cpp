@@ -17,11 +17,11 @@ void DiscRollerFlywheel::intakeOff() {
   def::mtr_it_right.moveVoltage(0);
 }
 
-void DiscRollerFlywheel::flywheelOn(int speed) { 
-  def::mtr_fw.moveVelocity(speed); //600
+void DiscRollerFlywheel::flywheelBack() { 
+  def::mtr_fw.moveVelocity(600); //600
 }
 
 //default is -500
-void DiscRollerFlywheel::flywheelOut(int speed) { def::mtr_fw.moveVelocity(speed); }
+void DiscRollerFlywheel::flywheelForward(int speed) { def::mtr_fw.moveVelocity(speed); }
 
 void DiscRollerFlywheel::flywheelOff() { def::mtr_fw.moveVoltage(0); }

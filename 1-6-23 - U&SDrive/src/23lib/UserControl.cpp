@@ -1,4 +1,7 @@
 #include "main.h"
+#include "23lib/DiscRollerFlywheel.hpp"
+#include "23lib/definitions.hpp"
+#include "23lib/UserControl.hpp"
 #include "okapi/api/units/QLength.hpp"
 #include <string>
 
@@ -40,19 +43,19 @@ void UserControl::usercontrol() {
                def::controller.getAnalog(ControllerAnalog::leftX)/turnDivisor);
 
     //flywheel
-    if (def::controller2.getDigital(ControllerDigital::L1))
-      DiscRollerFlywheel::flywheelOn();
-    else if (def::controller2.getDigital(ControllerDigital::L2))
-      DiscRollerFlywheel::flywheelOut(-300);
-    else if(def::controller2.getAnalog(ControllerDigital::X)){
-      DiscRollerFlywheel::flywheelOut(-500);
+    if (def::controller2.getDigital(ControllerDigital::L2))
+      DiscRollerFlywheel::flywheelBack();
+    else if (def::controller2.getDigital(ControllerDigital::L1))
+      DiscRollerFlywheel::flywheelForward(-200);
+    else if(def::controller2.getDigital(ControllerDigital::X)){
+      DiscRollerFlywheel::flywheelForward(-500);
     }
     else
       DiscRollerFlywheel::flywheelOff();
 
     //intake & roller
     if(def::controller2.getDigital(ControllerDigital::left)){
-      rollerSpeed = 500;
+      rollerSpeed = 900;
     }
     else{
       rollerSpeed = 1200;
