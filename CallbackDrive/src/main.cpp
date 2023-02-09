@@ -1,5 +1,5 @@
 #include "v5_vcs.h"
-#include "C:\Users\mcallisters7328\Desktop\VSCode\5430D_Code\config.h"
+#include "../../config.h"
 
 int main() {
     
@@ -19,4 +19,8 @@ void move(double leftFront, double leftBack, double rightFront,
 void moveArcade(double forward, double strafe, double turn){
     move(forward + strafe + turn, forward - strafe + turn,
        forward - strafe - turn, forward + strafe - turn); //order matters
+}
+
+void intakeIn(int speed){
+    mtr_it_left.spin()
 }
