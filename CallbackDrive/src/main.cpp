@@ -1,11 +1,7 @@
 #include "v5_vcs.h"
-<<<<<<< HEAD
-#include "../../config.h"
-=======
 #include "././config.h"
 
 using namespace vex;
->>>>>>> ecd93cc (im dying a death by a thousand cuts)
 
 int main() {
 
@@ -14,9 +10,7 @@ int main() {
 void piston(){
 }
 
-<<<<<<< HEAD
 void move(double leftFront, double leftBack, double rightFront, //flatten these numbers with the curve here: https://www.desmos.com/calculator/rerhnlaim4
-=======
 
 //////////////////////////////////////
 // flywheel speeds, motors, methods //
@@ -87,7 +81,6 @@ bool Pneumatic::getState() const
 //////////////////////////////
 
 void move(double leftFront, double leftBack, double rightFront,
->>>>>>> ecd93cc (im dying a death by a thousand cuts)
           double rightBack){     
     mtr_dt_left_front.setVelocity(leftFront, percent); // define the motors
     mtr_dt_left_back.setVelocity(leftBack, percent);
