@@ -13,7 +13,7 @@ motor mtr_fw(PORT3, ratio18_1, false);
 motor mtr_move(PORT17, ratio18_1, true);
 
 
-pneumatics air(Brain.ThreeWirePort.A);
+pneumatics piston(Brain.ThreeWirePort.A);
 
 controller control1 = controller(primary);
 controller control2 = controller(partner);
