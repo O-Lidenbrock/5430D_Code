@@ -11,7 +11,8 @@
 			"${vex_sdkPath}/gcc/include/sys/**",
 			"${vex_sdkPath}/clang/8.0.0/include/**",
 			"${vex_gcc}/",
-			"CallbackDrive/src/**"
+			"${workspaceFolder}/include/**",
+			"${workspaceFolder}/src/**"
 		]
 	},
 	"configurations": [
