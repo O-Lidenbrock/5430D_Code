@@ -1,24 +1,20 @@
 #include "v5_vcs.h"
-#include "../../config.h"
+#include "..\config.h"
 
 using namespace vex;
-
-int main() {
-  userDrive();
-}
 
 //////////////////////////////////////
 // flywheel speeds, motors, methods //
 //////////////////////////////////////
 
 void intakeIn(double v) {
-  mtr_it_left.spin(fwd, v, volt);
-  mtr_it_right.spin(fwd, v, volt);
+  mtr_it_left.spin(fwd, -v, volt);
+  mtr_it_right.spin(fwd, -v, volt);
 }
 
 void intakeOut() {
-  mtr_it_left.spin(fwd, -12, volt);//-12000 default
-  mtr_it_right.spin(fwd, -12, volt);
+  mtr_it_left.spin(fwd, 12, volt);//-12000 default
+  mtr_it_right.spin(fwd, 12, volt);
 }
 
 void intakeOff() {
@@ -86,9 +82,9 @@ void userDrive(){
     //Analog = Joysticks - range of numbers between -100 and 100
     
     // define parameters for moveArcade as controller axises 
-    moveArcade(control1.Axis1.position(),
-               control1.Axis2.position(),
-               control1.Axis3.position()/turnDivisor);
+    moveArcade(control1.Axis2.position(),
+               control1.Axis1.position(),
+               control1.Axis4.position()/turnDivisor);
     
 
     //flywheel
@@ -104,7 +100,7 @@ void userDrive(){
 
     //intake & roller
     if(control2.ButtonLeft.pressing()){
-      rollerSpeed = 900;
+      rollerSpeed = 8;
     }
     else{
       rollerSpeed = 12;
@@ -128,5 +124,9 @@ void userDrive(){
       okapi::setBrakeMode(mtr_move.hold);
       def::mtr_move.moveVoltage(0);*/
   }
+}
+
+int main() {
+  userDrive();
 }
 
