@@ -106,10 +106,10 @@ void userDrive(){
 
     //intake & roller
     if(controller2(ButtonLeft)){
-      rollerSpeed = 900;
+      rollerSpeed = 9;
     }
     else{
-      rollerSpeed = 1200;
+      rollerSpeed = 12;
     }
 
     if (controller2(ButtonR1))
@@ -124,11 +124,11 @@ void userDrive(){
       
 
     if (controller2.getDigital(ControllerDigital::B)) {
-      mtr_move.spinTo(90.0, deg, 50, pct, false/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/);
+      mtr_move.spinTo(90.0, deg, 50, pct, false)/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/);
     }
     /*else
       okapi::setBrakeMode(mtr_move.hold);
       def::mtr_move.moveVoltage(0);*/
+    }
   }
-}
 }
