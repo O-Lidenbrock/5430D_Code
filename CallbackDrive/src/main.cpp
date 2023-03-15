@@ -1,9 +1,7 @@
 #include "v5_vcs.h"
-#include "././config.h"
+#include "../../config.h"
 
 using namespace vex;
-
-private int turnDivisor = 3;
 
 int main() {
 
@@ -19,8 +17,8 @@ void intakeIn(double v) {
 }
 
 void intakeOut() {
-  mtr_it_left.spin(rev, 12, volt);//-12000 default
-  mtr_it_right.spin(rev, 12, volt);
+  mtr_it_left.spin(fwd, -12, volt);//-12000 default
+  mtr_it_right.spin(fwd, -12, volt);
 }
 
 void intakeOff() {
@@ -33,7 +31,7 @@ void flywheelBack() {
 }
 
 //default is -500
-void flywheelForward(double speed) { def::mtr_fw.spin(fwd, speed, volt); }
+void flywheelForward(double speed) { mtr_fw.spin(fwd, speed, volt); }
 
 void flywheelOff() { mtr_fw.spin(fwd, 0, volt); }
 
@@ -47,7 +45,7 @@ void flywheelOff() { mtr_fw.spin(fwd, 0, volt); }
 void toggle()
 {
     piston.open();
-    sleep(800); // was 800 before
+    wait(800, msec); // was 800 before
     piston.close();
 }
 
@@ -77,7 +75,7 @@ void userDrive(){
     // slow intake (for the roller): also controller2
 
     // toggle turn speed
-    if(controller1.getDigital(R1))
+    if(control1.ButtonR1.pressing())
     {turnDivisor = 3;}
     else
     {
@@ -88,47 +86,47 @@ void userDrive(){
     //Analog = Joysticks - range of numbers between -100 and 100
     
     // define parameters for moveArcade as controller axises 
-    moveArcade(controller1(Axis1),
-               controller1(Axis2),
-               controller1(Axis3)/turnDivisor);
+    moveArcade(control1.Axis1.position(),
+               control1.Axis2.position(),
+               control1.Axis3.position()/turnDivisor);
     
 
     //flywheel
-    if (controller2(ButtonL2))
+    if (control2.ButtonL2.pressing())
       flywheelBack();
-    else if (controller2(ButtonL1))
+    else if (control2.ButtonL1.pressing())
       flywheelForward(-200);
-    else if(controller2(ButtonX)){
+    else if(control2.ButtonX.pressing()){
       flywheelForward(-500);
     }
     else
       flywheelOff();
 
     //intake & roller
-    if(controller2(ButtonLeft)){
-      rollerSpeed = 9;
+    if(control2.ButtonLeft.pressing()){
+      rollerSpeed = 900;
     }
     else{
       rollerSpeed = 12;
     }
 
-    if (controller2(ButtonR1))
+    if (control2.ButtonR1.pressing())
       intakeIn(rollerSpeed);
-    else if (controller2(ButtonR2))
+    else if (control2.ButtonR2.pressing())
       intakeOut();
     else
       intakeOff();
 
-    if (controller2(ButtonDown))
+    if (control2.ButtonDown.pressing())
       toggle(); 
       
 
     if (controller2.getDigital(ControllerDigital::B)) {
-      mtr_move.spinTo(90.0, deg, 50, pct, false)/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/);
+      mtr_move.spinTo(90.0, deg, 50, pct, false/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/);
     }
     /*else
       okapi::setBrakeMode(mtr_move.hold);
       def::mtr_move.moveVoltage(0);*/
-    }
   }
+}
 }
