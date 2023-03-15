@@ -4,7 +4,7 @@
 using namespace vex;
 
 int main() {
-
+  userDrive();
 }
 
 //////////////////////////////////////
@@ -120,13 +120,13 @@ void userDrive(){
     if (control2.ButtonDown.pressing())
       toggle(); 
       
-
-    if (controller2.getDigital(ControllerDigital::B)) {
-      mtr_move.spinTo(90.0, deg, 50, pct, false/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/);
-    }
+  wait(15,msec);
+  // if (control2.ButtonB.pressing()) {
+    // while(mtr_move.spinTo(90.0, degrees, 50, percent, false));/*will need to look up this keyword: https://api.vexcode.cloud/v5/search/bool%20vex::motor::spinTo(double%20rotation,%20rotationUnits%20units,%20double%20velocity,%20velocityUnits%20units_v,%20bool%20waitForCompletion=true)/vex::motor/function*/}
+    
     /*else
       okapi::setBrakeMode(mtr_move.hold);
       def::mtr_move.moveVoltage(0);*/
   }
 }
-}
+
