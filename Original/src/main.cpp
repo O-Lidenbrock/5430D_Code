@@ -1,5 +1,5 @@
 #include "v5_vcs.h"
-#include "..\config.h"
+#include "..\..\config.h"
 
 using namespace vex;
 

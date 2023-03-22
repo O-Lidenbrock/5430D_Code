@@ -11,6 +11,7 @@ motor mtr_it_left(PORT6, ratio18_1, false);
 motor mtr_it_right(PORT7, ratio18_1, true);
 motor mtr_fw(PORT3, ratio18_1, false);
 motor mtr_move(PORT17, ratio18_1, true);
+inertial inertiaA(PORT5, left);
 
 
 pneumatics piston(Brain.ThreeWirePort.A);
